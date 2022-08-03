@@ -26,6 +26,17 @@ const ProductDetail = () => {
                 <div className="row">
                     <div className="col-12 col-md-6 col-lg-6 my-2">
                         <img src={product.image} alt="" height="300px" width="300px"/>
+                        <div className="container d-flex my-5">
+                            <div className=''>
+                            <img src={product.image} alt="" height="70px" width="80px"/>
+                            </div>
+                            <div className='mx-2'>
+                            <img src={product.image} alt="" height="70px" width="80px"/>
+                            </div>
+                            <div className='ms-2'>
+                            <img src={product.image} alt="" height="70px" width="80px"/>
+                            </div>
+                        </div>
                     </div>
                     <div className="col-12 col-md-6 col-lg-6 my-2">
                         <h3 className='my-2 text-success text-uppercase'>Product Name :  {product.title}</h3>

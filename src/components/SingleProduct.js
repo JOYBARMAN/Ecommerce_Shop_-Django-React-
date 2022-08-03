@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const SingleProduct = ({ item }) => {
     return (
-        <div className="card shadow" style={{ "width": "17rem", "border": "1px solid white", "borderRadius": "10px" }}>
+        <div className="card shadow" style={{ "width": "17rem", "border": "3px solid #97ee97", "borderRadius": "10px" }}>
             <Link to={`product/${item.id}`}>
                 <img src={item.image} className="card-img-top" alt={item.title} style={{ "height": "250px", "objectFit": "cover" }} />
             </Link>
