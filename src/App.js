@@ -3,7 +3,8 @@ import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 import HomePage from "./components/HomePage";
 import NoPage from "./components/NoPage";
 import ProductDetail from "./components/ProductDetail";
-import NavBar from "./components/NavBar"
+import NavBar from "./components/NavBar";
+import CategoryProduct from "./components/CategoryProduct";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route exact path='/' element={< HomePage />} />
         <Route path='/*' element={< NoPage />} />
         <Route path="/product/:id" element={<ProductDetail />}/>
+        <Route path="/category/:id" element={<CategoryProduct />}/>
       </Routes>
     </Router>
 

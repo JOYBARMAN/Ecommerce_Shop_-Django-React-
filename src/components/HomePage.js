@@ -1,10 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { domain } from '../env'
 import SingleProduct from './SingleProduct'
 const HomePage = () => {
     const [products, setProducts] = useState([])
     const [data, setData] = useState([])
+    const [category, setCategory] = useState([])
     
     const getProducts = () => {
         axios.get(`${domain}/product/`)
@@ -13,6 +15,7 @@ const HomePage = () => {
                 const allProducts = response.data.results
                 setData(data)
                 setProducts(allProducts)
+                // getCategory()
             })
             .catch(error => console.error(`Error : ${error}`))
     }
@@ -21,6 +24,18 @@ const HomePage = () => {
         getProducts()
     }, [])
 
+    useEffect(() => {
+        getCategory()
+    }, [])
+
+    const getCategory = () => {
+        axios.get(`${domain}/category/`)
+        .then((response)=>{
+            const data = response.data
+            setCategory(data)
+        })
+        .catch(error => console.error(`Error : ${error}`))
+    }
 
     const nextProduct = () => {
         axios.get(data?.next)
@@ -47,6 +62,14 @@ const HomePage = () => {
         <>
             <div className='container-fluid'>
                 <h2 className='text-danger fw-bold my-3'>All Products</h2>
+                <div className="d-flex my-2 justify-content-center">
+                    {category?.map((item,i)=>(
+                        <div className='mx-3' key={i}>
+                            <Link to={`category/${item.id}`} className='btn btn-secondary'>{item.title}</Link>
+                        </div>
+                    ))}
+                </div>
+                
                 <div className='row'>
                     {products?.map((item, i) => (
                         <div className="col-12 col-sm-6 col-md-4 col-lg-3 my-3" key={i}>
