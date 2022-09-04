@@ -8,7 +8,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include("shop.urls"))
+    path('api/', include("shop.urls")),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/login/', obtain_auth_token),
 ]
 
 if settings.DEBUG:

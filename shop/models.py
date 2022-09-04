@@ -73,3 +73,10 @@ class Order (models.Model):
         max_length=255, choices=Order_Status, default="Order Received")
     date = models.DateField(auto_now_add=True)
     payment = models.BooleanField(default=False)
+
+class GeeksModel(models.Model):
+    title = models.CharField(max_length = 200)
+    description = models.TextField()
+ 
+    def __str__(self):
+        return self.title

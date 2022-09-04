@@ -15,7 +15,6 @@ const HomePage = () => {
                 const allProducts = response.data.results
                 setData(data)
                 setProducts(allProducts)
-                // getCategory()
             })
             .catch(error => console.error(`Error : ${error}`))
     }

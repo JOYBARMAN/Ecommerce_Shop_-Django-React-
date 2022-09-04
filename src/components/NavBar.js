@@ -19,7 +19,7 @@ function NavBar() {
                         navbarScroll
                     >
                         <Nav.Link href="#" className='text-white'>Cart</Nav.Link>
-                        <Nav.Link href="#" className='text-white'>UserName</Nav.Link>
+                        <Nav.Link href="/login" className='text-white'>Login</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

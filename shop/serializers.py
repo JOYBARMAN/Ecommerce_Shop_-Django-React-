@@ -11,3 +11,9 @@ class CategorySerializers (serializers.ModelSerializer):
     class Meta :
         model = Category
         fields = "__all__"
+
+class GeeksSerializer(serializers.HyperlinkedModelSerializer):
+    # specify model and fields
+    class Meta:
+        model = GeeksModel
+        fields = ('title', 'description')

@@ -2,7 +2,8 @@ from rest_framework import generics ,viewsets
 from .models import *
 from .serializers import *
 from rest_framework.response import Response
-
+# import viewsets
+from rest_framework import viewsets
 
 class ListProduct (generics.ListAPIView):
     queryset=Product.objects.all().order_by("-id")
@@ -32,3 +33,10 @@ class CategoryView (viewsets.ModelViewSet):
 class ProductViewSet (viewsets.ModelViewSet):
     queryset = Product.objects.all().order_by("-id")
     serializer_class=ProductSerializers
+
+class GeeksViewSet(viewsets.ModelViewSet):
+    # define queryset
+    queryset = GeeksModel.objects.all()
+     
+    # specify serializer to be used
+    serializer_class = GeeksSerializer
