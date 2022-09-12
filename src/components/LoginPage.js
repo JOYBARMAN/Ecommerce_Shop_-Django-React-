@@ -20,11 +20,11 @@ const LoginPage = () => {
                 'Content-type': 'application/json; charset=UTF-8',
             }
         }).then(function (response) {
-            console.log(response);
-        })
-            .catch(function (error) {
-                console.log(error);
-            });;
+            window.localStorage.setItem("token", response.data['token'])
+        }).catch(function (error) {
+            console.log(error);
+            window.alert("Invalid Username or Password")
+        });
     }
     // const handleSubmit = (e) => {
     //     e.preventDefault();

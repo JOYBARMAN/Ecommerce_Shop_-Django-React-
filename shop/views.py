@@ -1,9 +1,9 @@
-from rest_framework import generics ,viewsets
+from rest_framework import generics ,viewsets,views
 from .models import *
 from .serializers import *
 from rest_framework.response import Response
-# import viewsets
-from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 
 class ListProduct (generics.ListAPIView):
     queryset=Product.objects.all().order_by("-id")
@@ -35,8 +35,19 @@ class ProductViewSet (viewsets.ModelViewSet):
     serializer_class=ProductSerializers
 
 class GeeksViewSet(viewsets.ModelViewSet):
-    # define queryset
     queryset = GeeksModel.objects.all()
-     
-    # specify serializer to be used
     serializer_class = GeeksSerializer
+
+
+class ProfileView(views.APIView):
+    authentication_classes=[TokenAuthentication,]
+    permission_classes=[IsAuthenticated,]
+    def get(self,request):
+        try:
+            query = Profile.objects.get(prouser=request.user)
+            serializers=ProfileSerializer(query)
+            response_msg ={"error":False,"data":serializers.data}
+        except:
+            response_msg = {"error":True,"message":"Something Went Wrong"}
+        return Response(response_msg)
+       
