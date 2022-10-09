@@ -1,5 +1,3 @@
-from dataclasses import fields
-from urllib import response
 from rest_framework import serializers
 from .models import *
 from django.contrib.auth.models import User
@@ -27,20 +25,21 @@ class GeeksSerializer(serializers.HyperlinkedModelSerializer):
 class UserSerializer (serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("id", "username", "password","first_name", "last_name","email")
-
+        fields = ("id", "username", "password",
+                  "first_name", "last_name", "email")
+        extra_kwargs = {"password":{"write_only":True,"required":True}}
 
 class ProfileSerializer(serializers.ModelSerializer):
-    class Mets:
+    class Meta:
         model = Profile
         fields = "__all__"
         read_only_fields = ["prouser"]
 
-        def validate(self,attrs):
-            attrs['prouser']=self.context['request'].user
-            return attrs
+    def validate(self, attrs):
+        attrs['prouser'] = self.context['request'].user
+        return attrs
 
-        def to_representation (self,instance):
-            response = super().to_representation(instance)
-            response ['prouser'] = UserSerializer(instance.prouser).data
-            return response
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['prouser'] = UserSerializer(instance.prouser).data
+        return response

@@ -4,6 +4,8 @@ from .serializers import *
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 
 class ListProduct (generics.ListAPIView):
     queryset=Product.objects.all().order_by("-id")
@@ -51,3 +53,34 @@ class ProfileView(views.APIView):
             response_msg = {"error":True,"message":"Something Went Wrong"}
         return Response(response_msg)
        
+# class ProfileView(views.APIView):
+#     # authentication_classes=[TokenAuthentication,]
+#     # permission_classes=[IsAuthenticated,]
+#     def get(self,request):
+#         # try:
+#         #     query = Profile.objects.get(prouser=request.user)
+#         #     serializers=ProfileSerializer(query)
+#         #     response_msg ={"error":False,"data":serializers.data}
+#         # except:
+#         #     response_msg = {"error":True,"message":"Something Went Wrong"}
+#         # return Response(response_msg)
+#         query = User.objects.all()
+#         serializers = UserSerializer(query)
+#         return Response(serializers.data)
+
+# class ProfileView (viewsets.ModelViewSet):
+#     authentication_classes=[TokenAuthentication,]
+#     permission_classes=[IsAuthenticated,]
+#     queryset=Profile.objects.all().order_by("-id")
+#     serializer_class=ProfileSerializer
+#     def get (self,request):
+#         query = Profile.objects.get(prouser_id =request.user.id)
+#         serializers=ProfileSerializer(query)
+#         response_msg ={"error":False,"data":serializers.data}
+#         return Response(response_msg)
+
+    # def retrieve(self, request,pk=1):
+    #     queryset = Profile.objects.all()
+    #     user = get_object_or_404(queryset, id=pk)
+    #     serializer = ProfileSerializer(user)
+    #     return Response(serializer.data)

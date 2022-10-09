@@ -2,6 +2,9 @@
 
 export const domain = "http://127.0.0.1:8000/api";
 export const token =window.localStorage.getItem("token")
+export const header = {
+    Authorization: `token ${token}`,
+  };
 // export const domain = "";
 
 /*
@@ -12,9 +15,7 @@ export const token =window.localStorage.getItem("token")
     */
 // const token = "";
 // const csrftoken = Cookies.get("csrftoken");
-// export const getheader = {
-//   Authorization: `token ${token}`,
-// };
+
 
 // export const postheader = {
 //   "X-CSRFToken": csrftoken,
