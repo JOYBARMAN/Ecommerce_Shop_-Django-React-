@@ -2,10 +2,13 @@ import React from 'react'
 import { domain } from '../env'
 import axios from 'axios'
 import { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
     const [username, setUsername] = useState(null)
     const [password, setPassword] = useState(null)
+
+    const navigate = useNavigate()
 
     const loginRequest = (e) => {
         e.preventDefault();
@@ -21,6 +24,7 @@ const LoginPage = () => {
             }
         }).then(function (response) {
             window.localStorage.setItem("token", response.data['token'])
+            navigate('/')
         }).catch(function (error) {
             console.log(error);
             window.alert("Invalid Username or Password")

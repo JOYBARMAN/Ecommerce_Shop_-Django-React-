@@ -13,5 +13,6 @@ route.register('geeks', GeeksViewSet,basename="geeks")
 urlpatterns = [
     path("",include(route.urls)),
     path('profile/',ProfileView.as_view(),name="profile"),
+    path('updateprofile/',UpdateProfileView.as_view(),name='updateprofile'),
     # path('product/<int:pk>/',DetailProduct.as_view(),name="productdetail"),
 ]

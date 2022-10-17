@@ -6,16 +6,21 @@ import ProductDetail from "./components/ProductDetail";
 import NavBar from "./components/NavBar";
 import CategoryProduct from "./components/CategoryProduct";
 import LoginPage from "./components/LoginPage";
+import ProfilePage from "./components/ProfilePage";
 import axios from "axios";
 import { domain, header, token } from "./env";
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
+import { useGlobalState } from "./state/provider"
+import './App.css'
 function App() {
+  const [{ profile,pagereload }, dispatch] = useGlobalState()
   const getProfile = () => {
     axios.get(`${domain}/profile/`, { headers: header })
       .then((response) => {
-        const data = response.data.data
-        console.log("profile", data)
+        dispatch ({
+          type : "ADD_PROFILE",
+          profile : response.data['data']
+        })
       })
       .catch(error => console.error(`Error : ${error}`))
   }
@@ -24,7 +29,7 @@ function App() {
     if (token !== null) {
       getProfile()
     }
-  }, [])
+  }, [pagereload])
   return (
     <Router>
       <NavBar />
@@ -33,6 +38,7 @@ function App() {
         <Route path='/*' element={< NoPage />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/category/:id" element={<CategoryProduct />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>
     </Router>

@@ -84,3 +84,24 @@ class ProfileView(views.APIView):
     #     user = get_object_or_404(queryset, id=pk)
     #     serializer = ProfileSerializer(user)
     #     return Response(serializer.data)
+
+
+class UpdateProfileView(views.APIView):
+    authentication_classes=[TokenAuthentication,]
+    permission_classes=[IsAuthenticated,]
+
+    def post (self,request):
+        try :
+            user = request.user
+            data = request.data
+            user_obj = User.objects.get(username=user)
+            user_obj.first_name = data['first_name']
+            user_obj.last_name = data ['last_name']
+            user_obj.email = data['email']
+            user_obj.save()
+            
+            response_msg ={"error":False,"message":"Sucessfully Update"}
+        except :
+            response_msg ={"error":True,"message":"something went wrong "}
+
+        return Response(response_msg)
